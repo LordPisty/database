@@ -46,6 +46,10 @@ dependencies {
 
 }
 
+run{
+    standardInput = System.in
+}
+
 task generateJavadocs(type: Javadoc) {
     source = sourceSets.main.allJava
 }
