@@ -1,7 +1,6 @@
 package com.database;
 
 import com.database.command.Factory;
-import com.database.command.ICommand;
 import com.database.command.IFactory;
 import com.database.result.Handler;
 import com.database.result.IHandler;
