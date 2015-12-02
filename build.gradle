@@ -1,0 +1,56 @@
+/**
+ *  Tasks:
+ *  clean - delete all build artifacts
+ *  test - run all unit tests (reports -> 'build/reports/tests/', results -> 'build/test-results/')
+ *  intTest - run integration tests (reports -> 'build/reports/tests/', results -> 'build/test-results/')
+ *  generateJavadocs - generate javadoc documentation into 'build/docs/javadoc/'
+ *  build - build application
+ *  run - run main method
+ */
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+version = '1.0'
+mainClassName = "com.database.Main"
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+}
+
+sourceSets {
+    integrationTest {
+        java {
+            srcDir 'src/integration-test/java'
+        }
+        resources {
+            srcDir 'src/integration-test/resources'
+        }
+        compileClasspath += sourceSets.main.compileClasspath
+        compileClasspath += sourceSets.main.runtimeClasspath
+        compileClasspath += sourceSets.test.runtimeClasspath
+    }
+}
+
+dependencies {
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.6'
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+
+}
+
+task generateJavadocs(type: Javadoc) {
+    source = sourceSets.main.allJava
+}
+
+task intTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath += sourceSets.integrationTest.runtimeClasspath
+}
