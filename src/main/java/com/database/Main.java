@@ -17,13 +17,13 @@ public class Main {
         // setup
         final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         final IFactory commandFactory = new Factory();
-        final IHandler<String> resultHandler = new Handler();
+        final IHandler resultHandler = new Handler();
         final DB db = new DB();
 
         // stream
         in.lines().
                 map(commandFactory).
-                map(command -> command.execute(db)).
+                map(db::execute).
                 forEach(resultHandler::handle);
     }
 }

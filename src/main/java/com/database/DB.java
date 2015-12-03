@@ -1,46 +1,62 @@
 package com.database;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.database.command.ICommand;
+import com.database.command.Type;
+import com.database.data.DataFrame;
+import com.database.data.IDataFrame;
+
+import java.util.*;
 
 /**
  * Created by screspi on 12/1/15.
  */
-public class DB implements IDB {
+public class DB<K, V> implements IDB<K, V, Object> {
 
-    private Map<String, String> storage;
+    private static final Set<Type> TX_MODIFIERS = new HashSet<>(Arrays.asList(Type.SET, Type.UNSET));
+
+    private IDataFrame<K, V, Object> base;
+    private Stack<IDataFrame<K, V, Object>> txs;
+
 
     public DB() {
-        storage = new HashMap<>();
+        base = new DataFrame<>(null);
+        txs = new Stack<>();
     }
 
     @Override
-    public void set(String key, String value) {
-        storage.put(key, value);
+    public Optional<Object> execute(ICommand<K, V, Object> command) {
+        if (TX_MODIFIERS.contains(command.getType())) {
+            getCurrentFrame().addTxModifier(command);
+        }
+        switch(command.getType()) {
+            case BEGIN:
+                txs.push(new DataFrame<>(getCurrentFrame()));
+                return null;
+            case ROLLBACK:
+                try {
+                    txs.pop();
+                    return null;
+                } catch (EmptyStackException e) {
+                    return Optional.of("NO TRANSACTION");
+                }
+            case COMMIT:
+                txs.iterator().forEachRemaining(tx -> tx.getTxModifiers().forEachRemaining(cmd -> cmd.execute(base)));
+                txs.removeAllElements();
+                return null;
+            case END:
+                return command.execute(null);
+            default:
+                return command.execute(getCurrentFrame());
+        }
     }
 
-    @Override
-    public String get(String key) {
-        return storage.get(key);
-    }
-
-    @Override
-    public Integer count(String key) {
-        return null;
-    }
-
-    @Override
-    public void beginTx() {
-
-    }
-
-    @Override
-    public void commitTx() {
-
-    }
-
-    @Override
-    public void rollbackTx() {
-
+    private IDataFrame<K, V, Object> getCurrentFrame() {
+        IDataFrame<K, V, Object> retVal = base;
+        try {
+            retVal = txs.peek();
+        } catch (EmptyStackException e) {
+            // debug
+        }
+        return retVal;
     }
 }

@@ -4,9 +4,9 @@ import com.database.command.impl.EmptyCommand;
 import com.database.command.impl.EndCommand;
 import com.database.command.impl.GetCommand;
 import com.database.command.impl.SetCommand;
+import com.database.command.impl.CountCommand;
+import com.database.command.impl.UnsetCommand;
 
-import static com.database.command.Type.SET;
-import static com.database.command.Type.GET;
 
 /**
  * Created by screspi on 12/1/15.
@@ -18,17 +18,21 @@ public class Factory implements IFactory{
         final String[] tokens = command.split(" ");
         final Type type = Type.getFromName(tokens[0]);
         if (type == null) {
-            return new EmptyCommand();
+            return new EmptyCommand(Type.EMPTY);
         }
         switch(type) {
             case SET:
-                return new SetCommand(tokens[1], tokens[2]);
+                return new SetCommand(Type.SET, tokens[1], tokens[2]);
             case GET:
-                return new GetCommand(tokens[1]);
+                return new GetCommand(Type.GET, tokens[1]);
+            case UNSET:
+                return new UnsetCommand(Type.UNSET, tokens[1]);
+            case NUMEQUALTO:
+                return new CountCommand(Type.NUMEQUALTO, tokens[1]);
             case END:
-                return new EndCommand();
+                return new EndCommand(Type.END);
             default:
-                return new EmptyCommand();
+                return new EmptyCommand<>(type);
         }
     }
 }

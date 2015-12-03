@@ -14,7 +14,8 @@ public enum Type {
     END,
     BEGIN,
     COMMIT,
-    ROLLBACK;
+    ROLLBACK,
+    EMPTY;
 
     private static Map<String, Type> map = new HashMap<>();
 
