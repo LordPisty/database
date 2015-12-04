@@ -7,16 +7,29 @@ import com.database.data.IDataFrame;
 import java.util.Optional;
 
 /**
- * Created by screspi on 12/1/15.
+ * Implementation of an {@link AbstractCommand} that
+ * counts the number of variables set to {@code value}.
+ *
+ * @param <K> the type of keys maintained by the database
+ * @param <V> the type of mapped values
  */
 public class CountCommand<K, V> extends AbstractCommand<K, V, Integer> {
     private final V value;
 
-    public CountCommand(Type type, V value) {
-        super(type);
+    /**
+     * Constructs a command to count the occurrences of
+     * the specified {@code value}.
+     *
+     * @param value the value to count on
+     */
+    public CountCommand(V value) {
+        super(Type.NUMEQUALTO);
         this.value = value;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Integer> execute(IDataFrame<K, V, Integer> dataFrame) {
         return Optional.of(dataFrame.count(value));

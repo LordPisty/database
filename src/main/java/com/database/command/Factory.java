@@ -39,15 +39,15 @@ public class Factory implements Function<String, ICommand> {
         }
         switch(type) {
             case SET:
-                return new SetCommand(Type.SET, tokens[1], tokens[2]);
+                return new SetCommand(tokens[1], tokens[2]);
             case GET:
-                return new GetCommand(Type.GET, tokens[1]);
+                return new GetCommand(tokens[1]);
             case UNSET:
-                return new UnsetCommand(Type.UNSET, tokens[1]);
+                return new UnsetCommand(tokens[1]);
             case NUMEQUALTO:
-                return new CountCommand(Type.NUMEQUALTO, tokens[1]);
+                return new CountCommand(tokens[1]);
             case END:
-                return new EndCommand(Type.END);
+                return new EndCommand();
             default:
                 return new EmptyCommand<>(type);
         }
