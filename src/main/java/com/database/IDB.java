@@ -22,5 +22,5 @@ public interface IDB<K, V, R> {
      * @return the result of the computation wrapped into an
      * {@link java.util.Optional} or eventually {@code null}
      */
-    public Optional<R> execute(ICommand<K, V, R> command);
+    Optional<R> execute(ICommand<K, V, R> command);
 }
