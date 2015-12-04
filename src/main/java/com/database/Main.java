@@ -1,12 +1,13 @@
 package com.database;
 
 import com.database.command.Factory;
-import com.database.command.IFactory;
+import com.database.command.ICommand;
 import com.database.result.Handler;
-import com.database.result.IHandler;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * Created by screspi.
@@ -16,14 +17,14 @@ public class Main {
     public static void main(String[] args) {
         // setup
         final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        final IFactory commandFactory = new Factory();
-        final IHandler resultHandler = new Handler();
+        final Function<String, ICommand> commandFactory = new Factory();
         final DB db = new DB();
+        final Consumer resultHandler = new Handler();
 
         // stream
         in.lines().
                 map(commandFactory).
                 map(db::execute).
-                forEach(resultHandler::handle);
+                forEach(resultHandler::accept);
     }
 }

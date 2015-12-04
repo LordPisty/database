@@ -8,7 +8,13 @@ import com.database.data.IDataFrame;
 import java.util.*;
 
 /**
- * Created by screspi on 12/1/15.
+ * Implementation of the {@link IDB} interface,
+ * supporting transactions, and returning {@link Object}
+ * as results to encompass {@link Integer} and {@link String}
+ * results.
+ *
+ * @param <K> the type of keys maintained by this database
+ * @param <V> the type of mapped values
  */
 public class DB<K, V> implements IDB<K, V, Object> {
 
@@ -17,12 +23,17 @@ public class DB<K, V> implements IDB<K, V, Object> {
     private IDataFrame<K, V, Object> base;
     private Stack<IDataFrame<K, V, Object>> txs;
 
-
+    /**
+     * Basic constructor.
+     */
     public DB() {
         base = new DataFrame<>(null);
         txs = new Stack<>();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Object> execute(ICommand<K, V, Object> command) {
         if (TX_MODIFIERS.contains(command.getType())) {
