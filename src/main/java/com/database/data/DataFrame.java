@@ -77,13 +77,9 @@ public class DataFrame<K, V, R> implements IDataFrame<K, V, R> {
 
     @Override
     public Integer count(V value) {
-        Integer retVal = counts.get(value);
-        if (retVal == null) {
-            if (ancestor != null) {
-                retVal = ancestor.count(value);
-            } else {
-                retVal = 0;
-            }
+        Integer retVal = counts.getOrDefault(value, 0);
+        if (retVal == 0 && ancestor != null) {
+            retVal = ancestor.count(value);
             // cache locally
             counts.put(value, retVal);
         }

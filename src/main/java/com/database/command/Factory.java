@@ -11,11 +11,13 @@ import com.database.command.impl.UnsetCommand;
 /**
  * Created by screspi on 12/1/15.
  */
-public class Factory implements IFactory{
+public class Factory implements IFactory {
+
+    private static final String SEPARATOR = " ";
 
     @Override
     public ICommand apply(String command) {
-        final String[] tokens = command.split(" ");
+        final String[] tokens = command.split(SEPARATOR);
         final Type type = Type.getFromName(tokens[0]);
         if (type == null) {
             return new EmptyCommand(Type.EMPTY);
