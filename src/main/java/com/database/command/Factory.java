@@ -15,6 +15,7 @@ import java.util.function.Function;
  * serve as factory for command instances. It parses the input
  * according to this grammar:
  * <p>{@code cmd_string: cmd_key [arg1 [arg2]]}
+ * <p>{@code cmd_key: SET|GET|UNSET|NUMEQUALTO|END|BEGIN|COMMIT|ROLLBACK
  */
 public class Factory implements Function<String, ICommand> {
 
