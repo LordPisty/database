@@ -6,7 +6,7 @@ import com.database.data.IDataFrame;
 import java.util.Optional;
 
 /**
- * Implementation of an {@link AbstractCommand} that
+ * Implementation of an {@link com.database.command.impl.AbstractCommand} that
  * terminates the program.
  *
  * @param <K> the type of keys maintained by the database

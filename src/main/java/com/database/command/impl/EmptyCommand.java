@@ -6,7 +6,7 @@ import com.database.data.IDataFrame;
 import java.util.Optional;
 
 /**
- * No-op implementation of an {@link AbstractCommand}
+ * No-op implementation of an {@link com.database.command.impl.AbstractCommand}
  *
  * @param <K> the type of keys maintained by the database
  * @param <V> the type of mapped values

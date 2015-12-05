@@ -7,7 +7,7 @@ import com.database.data.IDataFrame;
 import java.util.Optional;
 
 /**
- * Abstract implementation of an {@link ICommand}
+ * Abstract implementation of an {@link com.database.command.ICommand}
  * with a specific type.
  *
  * @param <K> the type of keys maintained by the database

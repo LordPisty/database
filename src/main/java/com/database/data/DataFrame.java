@@ -11,7 +11,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 /**
- * Created by crespis on 12/3/2015.
+ * Implementation of the {@link com.database.data.IDataFrame} interface,
+ * based on maps for values and counts, and keeping an ordered {@link java.util.List}
+ * of modifiers {@link com.database.command.ICommand} to replay on commit.
+ *
+ * @param <K> the type of keys maintained by the database
+ * @param <V> the type of mapped values
+ * @param <R> the type of results of commands execution
  */
 public class DataFrame<K, V, R> implements IDataFrame<K, V, R> {
 
@@ -21,14 +27,22 @@ public class DataFrame<K, V, R> implements IDataFrame<K, V, R> {
     private Map<V, Integer> counts = new HashMap<>();
     private Set<K> unset = null;
 
-    public DataFrame(IDataFrame<K, V, R> dataFrame) {
-        ancestor = dataFrame;
-        if (ancestor != null) {
+    /**
+     * Constructs a data frame with the specified ancestor.
+     *
+     * @param ancestor the ancestor data frame
+     */
+    public DataFrame(IDataFrame<K, V, R> ancestor) {
+        this.ancestor = ancestor;
+        if (this.ancestor != null) {
             unset = new HashSet<>();
             txModifiers = new ArrayList<>();
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addTxModifier(ICommand<K, V, R> command) {
         if (ancestor != null) {
@@ -36,11 +50,17 @@ public class DataFrame<K, V, R> implements IDataFrame<K, V, R> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Iterator<ICommand<K, V, R>> getTxModifiers() {
         return txModifiers.iterator();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void set(K key, V value) {
         final V oldValue = get(key);
@@ -56,6 +76,9 @@ public class DataFrame<K, V, R> implements IDataFrame<K, V, R> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void unset(K key) {
         final V oldValue = get(key);
@@ -70,6 +93,9 @@ public class DataFrame<K, V, R> implements IDataFrame<K, V, R> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public V get(K key) {
         V retVal = values.get(key);
@@ -81,6 +107,9 @@ public class DataFrame<K, V, R> implements IDataFrame<K, V, R> {
         return retVal;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer count(V value) {
         Integer retVal = counts.getOrDefault(value, 0);

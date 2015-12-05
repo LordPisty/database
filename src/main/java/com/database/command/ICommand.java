@@ -6,7 +6,7 @@ import com.database.data.IDataFrame;
 import java.util.Optional;
 
 /**
- * Interface for a command to execute on an {@link IDB}.
+ * Interface for a command to execute on an {@link com.database.IDB}.
  *
  * @param <K> the type of keys maintained by the database
  * @param <V> the type of mapped values
@@ -15,10 +15,10 @@ import java.util.Optional;
 public interface ICommand<K, V, R>{
 
     /**
-     * Executes the command on a specific {@link IDataFrame}
+     * Executes the command on a specific {@link com.database.data.IDataFrame}
      *
      * @param dataFrame the data frame to execute on
-     * @return the result of the execution wrapped into an {@link Optional}
+     * @return the result of the execution wrapped into an {@link java.util.Optional}
      */
     Optional<R> execute(IDataFrame<K, V, R> dataFrame);
 

@@ -4,8 +4,8 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
- * Implementation of a {@link Consumer} to handle
- * results wrapped into an {@link Optional}, which
+ * Implementation of a {@link java.util.function.Consumer} to handle
+ * results wrapped into an {@link java.util.Optional}, which
  * prints the value or {@code NULL} to {@code stdout}.
  */
 public class Handler implements Consumer<Optional<Object>> {

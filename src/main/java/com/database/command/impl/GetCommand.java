@@ -6,7 +6,7 @@ import com.database.data.IDataFrame;
 import java.util.Optional;
 
 /**
- * Implementation of an {@link AbstractCommand} that
+ * Implementation of an {@link com.database.command.impl.AbstractCommand} that
  * returns the {@code value} associated with a {@code key},
  * or {@code null} if not present.
  *

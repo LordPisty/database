@@ -8,9 +8,9 @@ import com.database.data.IDataFrame;
 import java.util.*;
 
 /**
- * Implementation of the {@link IDB} interface,
- * supporting transactions, and returning {@link Object}
- * as results to encompass {@link Integer} and {@link String}
+ * Implementation of the {@link com.database.IDB} interface,
+ * supporting transactions, and returning {@link java.lang.Object}
+ * as results to encompass {@link java.lang.Integer} and {@link java.lang.String}
  * results.
  *
  * @param <K> the type of keys maintained by this database
