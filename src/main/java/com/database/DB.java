@@ -20,15 +20,19 @@ public class DB<K, V> implements IDB<K, V, Object> {
 
     private static final Set<Type> TX_MODIFIERS = new HashSet<>(Arrays.asList(Type.SET, Type.UNSET));
 
-    private IDataFrame<K, V, Object> base;
-    private Stack<IDataFrame<K, V, Object>> txs;
+    private final IDataFrame<K, V, Object> base;
+    private final Stack<IDataFrame<K, V, Object>> txs;
 
     /**
-     * Basic constructor.
+     * Constructs a db starting from a base data frame
+     * and a {@link java.util.Stack} of transactions.
+     *
+     * @param base the base data frame
+     * @param txs the {@link java.util.Stack} of transactions
      */
-    public DB() {
-        base = new DataFrame<>(null);
-        txs = new Stack<>();
+    public DB(IDataFrame base, Stack<IDataFrame<K, V, Object>> txs) {
+        this.base = base;
+        this.txs = txs;
     }
 
     /**

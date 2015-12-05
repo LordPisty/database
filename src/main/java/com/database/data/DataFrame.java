@@ -34,7 +34,7 @@ public class DataFrame<K, V, R> implements IDataFrame<K, V, R> {
      */
     public DataFrame(IDataFrame<K, V, R> ancestor) {
         this.ancestor = ancestor;
-        if (this.ancestor != null) {
+        if (getAncestor() != null) {
             unset = new HashSet<>();
             txModifiers = new ArrayList<>();
         }
@@ -45,7 +45,7 @@ public class DataFrame<K, V, R> implements IDataFrame<K, V, R> {
      */
     @Override
     public void addTxModifier(ICommand<K, V, R> command) {
-        if (ancestor != null) {
+        if (getAncestor() != null) {
             txModifiers.add(command);
         }
     }
@@ -71,7 +71,7 @@ public class DataFrame<K, V, R> implements IDataFrame<K, V, R> {
         values.put(key, value);
         counts.put(value, count(value) + 1);
 
-        if (ancestor != null) {
+        if (getAncestor() != null) {
             unset.remove(key);
         }
     }
@@ -88,7 +88,7 @@ public class DataFrame<K, V, R> implements IDataFrame<K, V, R> {
 
         values.put(key, null);
 
-        if (ancestor != null) {
+        if (getAncestor() != null) {
             unset.add(key);
         }
     }
@@ -99,8 +99,8 @@ public class DataFrame<K, V, R> implements IDataFrame<K, V, R> {
     @Override
     public V get(K key) {
         V retVal = values.get(key);
-        if (retVal == null && ancestor != null && !unset.contains(key)) {
-            retVal = ancestor.get(key);
+        if (retVal == null && getAncestor() != null && !unset.contains(key)) {
+            retVal = getAncestor().get(key);
             // cache locally
             values.put(key, retVal);
         }
@@ -113,11 +113,20 @@ public class DataFrame<K, V, R> implements IDataFrame<K, V, R> {
     @Override
     public Integer count(V value) {
         Integer retVal = counts.getOrDefault(value, 0);
-        if (retVal == 0 && ancestor != null) {
-            retVal = ancestor.count(value);
+        if (retVal == 0 && getAncestor() != null) {
+            retVal = getAncestor().count(value);
             // cache locally
             counts.put(value, retVal);
         }
         return retVal;
+    }
+
+    /**
+     * Returns the frame ancestor.
+     *
+     * @return the frame ancestor
+     */
+    public IDataFrame<K, V, R> getAncestor() {
+        return ancestor;
     }
 }
