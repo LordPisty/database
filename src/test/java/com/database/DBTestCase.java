@@ -20,9 +20,6 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
 
-/**
- * Created by screspi on 12/5/15.
- */
 public class DBTestCase {
 
     private IDB instance;

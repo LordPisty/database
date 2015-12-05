@@ -3,7 +3,7 @@ package com.database;
 import com.database.command.Factory;
 import com.database.command.ICommand;
 import com.database.data.DataFrame;
-import com.database.result.Handler;
+import com.database.result.PrintHandler;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -21,7 +21,7 @@ public class Main {
         final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         final Function<String, ICommand> commandFactory = new Factory();
         final DB db = new DB(new DataFrame<>(null), new Stack<>());
-        final Consumer resultHandler = new Handler();
+        final Consumer resultHandler = new PrintHandler(System.out);
 
         // stream
         in.lines().
