@@ -5,7 +5,7 @@
 * Gradle: 2.7
 
 ### General Assumptions
-* any invalid command will be ignored a result in a no-op on the DB
+* any invalid command will be ignored and result in a no-op on the DB
 
 ### Run instructions
 * From the project folder run `gradle run`
