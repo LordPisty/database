@@ -33,23 +33,47 @@ public class Factory implements Function<String, ICommand> {
     @Override
     public ICommand apply(String command) {
         final String[] tokens = command.split(SEPARATOR);
+        if (tokens == null || tokens.length < 1) {
+            return new EmptyCommand(Type.EMPTY);
+        }
         final Type type = Type.getFromName(tokens[0]);
         if (type == null) {
             return new EmptyCommand(Type.EMPTY);
         }
         switch(type) {
             case SET:
-                return new SetCommand(tokens[1], tokens[2]);
+                if (checkArguments(tokens, 2)) {
+                    return new SetCommand(tokens[1], tokens[2]);
+                } else {
+                    return new EmptyCommand(Type.EMPTY);
+                }
             case GET:
-                return new GetCommand(tokens[1]);
+                if (checkArguments(tokens, 1)) {
+                    return new GetCommand(tokens[1]);
+                } else {
+                    return new EmptyCommand(Type.EMPTY);
+                }
             case UNSET:
-                return new UnsetCommand(tokens[1]);
+                if (checkArguments(tokens, 1)) {
+                    return new UnsetCommand(tokens[1]);
+                } else {
+                    return new EmptyCommand(Type.EMPTY);
+                }
             case NUMEQUALTO:
-                return new CountCommand(tokens[1]);
+                if (checkArguments(tokens, 1)) {
+                    return new CountCommand(tokens[1]);
+                } else {
+                    return new EmptyCommand(Type.EMPTY);
+                }
             case END:
                 return new EndCommand();
             default:
+                // marker commands for txs
                 return new EmptyCommand<>(type);
         }
+    }
+
+    private boolean checkArguments(String[] tokens, int requiredArguments) {
+        return tokens.length >= 1 + requiredArguments;
     }
 }

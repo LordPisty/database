@@ -2,13 +2,7 @@ package com.database.data;
 
 import com.database.command.ICommand;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * Implementation of the {@link com.database.data.IDataFrame} interface,
@@ -55,7 +49,7 @@ public class DataFrame<K, V, R> implements IDataFrame<K, V, R> {
      */
     @Override
     public Iterator<ICommand<K, V, R>> getTxModifiers() {
-        return txModifiers.iterator();
+        return (getAncestor() != null) ? txModifiers.iterator() : Collections.emptyIterator();
     }
 
     /**
