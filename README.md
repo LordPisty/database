@@ -15,7 +15,7 @@
 ### Available Gradle Tasks:
  *  `clean` - delete all build artifacts
  *  `test` - run all unit tests (reports -> 'build/reports/tests/', results -> 'build/test-results/')
- *  `intTest` - run integration tests (reports -> 'build/reports/tests/', results -> 'build/test-results/')
+ *  `intTest` - run integration tests (reports -> 'build/reports/intTests/', results -> 'build/test-results/')
  *  `generateJavadocs` - generate javadoc documentation into 'build/docs/javadoc/'
  *  `build` - build application
  *  `run` - run main method
