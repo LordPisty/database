@@ -11,6 +11,9 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Created by screspi.
+ */
 public class EmptyCommandTestCase {
 
     private ICommand instance;

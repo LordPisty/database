@@ -8,10 +8,10 @@ import java.util.EnumSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 
+/**
+ * Created by screspi.
+ */
 public class FactoryTestCase {
 
     private Factory instance;

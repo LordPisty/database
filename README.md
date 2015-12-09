@@ -5,11 +5,11 @@
 * Gradle: 2.7
 
 ### General Assumptions
-* any invalid command will be ignored and result in a no-op on the DB
+* any invalid command will be ignored, and result in a no-op on the DB
 
 ### Run instructions
 * From the project folder run `gradle run`
-* After running `gradle build` from the project folder, from `<project_folder>\build\classes\main` run `java com.database.Main`
+* or after running `gradle build` from the project folder, from `<project_folder>\build\classes\main` run `java com.database.Main`
 
 ### Available Gradle Tasks:
  *  `clean` - delete all build artifacts

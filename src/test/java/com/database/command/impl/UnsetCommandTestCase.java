@@ -12,6 +12,9 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Created by screspi.
+ */
 public class UnsetCommandTestCase {
 
     private static final String TEST = "TEST";

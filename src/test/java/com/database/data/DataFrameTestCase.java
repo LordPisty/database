@@ -13,6 +13,9 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
+/**
+ * Created by screspi.
+ */
 public class DataFrameTestCase {
 
     private static final String KEY_A = "key_A";

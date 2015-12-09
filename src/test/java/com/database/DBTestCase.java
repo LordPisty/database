@@ -19,7 +19,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
-
+/**
+ * Created by screspi.
+ */
 public class DBTestCase {
 
     private IDB instance;

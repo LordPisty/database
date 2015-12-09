@@ -13,6 +13,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+/**
+ * Created by screspi.
+ */
 public class PrintHandlerTestCase {
 
     private static final String TEST = "test";
