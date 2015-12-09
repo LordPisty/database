@@ -9,6 +9,7 @@
 
 ### Run instructions
 * From the project folder run `gradle run`
+  * the gradle runner accept also input from file, e.g.: `gradle run < test.txt`
 * or after running `gradle build` from the project folder, from `<project_folder>\build\classes\main` run `java com.database.Main`
 
 ### Available Gradle Tasks:
