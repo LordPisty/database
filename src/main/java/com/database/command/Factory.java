@@ -10,11 +10,11 @@ import com.database.command.impl.UnsetCommand;
 import java.util.function.Function;
 
 /**
- * Implementation of a {@link java.util.function.Function<String, ICommand>} to
+ * Implementation of a {@link java.util.function.Function} to
  * serve as factory for command instances. It parses the input
  * according to this grammar:
  * <p>{@code cmd_string: cmd_key [arg1 [arg2]]}
- * <p>{@code cmd_key: SET|GET|UNSET|NUMEQUALTO|END|BEGIN|COMMIT|ROLLBACK
+ * <p>{@code cmd_key: SET|GET|UNSET|NUMEQUALTO|END|BEGIN|COMMIT|ROLLBACK}
  */
 public class Factory implements Function<String, ICommand> {
 
