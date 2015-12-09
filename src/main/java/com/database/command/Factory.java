@@ -9,7 +9,6 @@ import com.database.command.impl.UnsetCommand;
 
 import java.util.function.Function;
 
-
 /**
  * Implementation of a {@link java.util.function.Function<String, ICommand>} to
  * serve as factory for command instances. It parses the input

@@ -1,6 +1,5 @@
 package com.database.command;
 
-import com.database.IDB;
 import com.database.data.IDataFrame;
 
 import java.util.Optional;
